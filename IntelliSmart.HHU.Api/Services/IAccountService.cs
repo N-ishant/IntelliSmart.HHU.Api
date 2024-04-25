@@ -8,5 +8,6 @@ namespace IntelliSmart.HHU.Api.Services
         bool RegisterUser(Register registermodel);
         bool UpdateUser(Register registermodel);
         bool DeleteUser(int userId);
+        IEnumerable<Register> GetAllUsers();
     }
 }

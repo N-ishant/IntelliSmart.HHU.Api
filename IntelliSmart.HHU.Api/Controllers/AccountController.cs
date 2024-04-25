@@ -18,7 +18,25 @@ namespace IntelliSmart.HHU.Api.Controllers
 
         ApiResponse response = new ApiResponse();
 
-
+        [HttpGet("GetAllUsers")]
+        public IActionResult GetAllUsers()
+        {
+            try
+            {
+                var users = _accountService.GetAllUsers();
+                response.StatusCode = 200;
+                response.Message = "Users retrieved successfully!";
+                response.Data = users;
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                response.StatusCode = 500;
+                response.Message = "Something went wrong";
+                response.Data = ex.Message;
+                return StatusCode(500, response);
+            }
+        }
 
         [HttpPost("ValidateUser")]
         public IActionResult ValidateUser(Login login)
@@ -48,7 +66,6 @@ namespace IntelliSmart.HHU.Api.Controllers
                 return StatusCode(500, response);
             }
         }
-
 
         [HttpPost("RegisterUser")]
         public IActionResult RegisterUser(Register register)
@@ -94,8 +111,6 @@ namespace IntelliSmart.HHU.Api.Controllers
             }
         }
 
-
-
         [HttpPost("UpdateUser")]
         public IActionResult UpdateUser(Register register)
         {
@@ -130,7 +145,6 @@ namespace IntelliSmart.HHU.Api.Controllers
                 return StatusCode(500, response);
             }
         }
-
 
         [HttpDelete("DeleteUser")]
         public IActionResult DeleteUser(int userId)

@@ -12,6 +12,19 @@ namespace IntelliSmart.HHU.Api.Services
             _dbContext = dbContext;
         }
 
+        public IEnumerable<Register> GetAllUsers()
+        {
+            try
+            {
+                return _dbContext.Users.ToList();
+            }
+            catch (Exception ex)
+            {
+                // Log or handle the exception
+                throw new Exception("Error occurred while retrieving all users.", ex);
+            }
+        }
+
         public Register ValidateUser(Login loginModel)
         {
             try
